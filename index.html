@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrossel de Imagens</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .carousel {
+            position: relative;
+            width: 500px;
+            height: 500px;
+            overflow: hidden;
+            border: none;
+        }
+        .carousel-inner {
+            display: flex;
+            width: 500px;
+            height: 500px;
+            margin: 0 ;
+            transition: transform 0.5s ease;
+        }
+        .carousel-inner img {
+            width: 100%;
+        }
+        .carousel-controls {
+            position: absolute;
+            top: 85%;
+            width: 10%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+        .carousel-controls button {
+            background-color: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: white;
+            padding: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel">
+        <div class="carousel-inner">
+            <img src="img/p1..png" alt="Imagem 1">
+            <img src="img/p2..png" alt="Imagem 2">
+            <img src="img/p3..png" alt="Imagem 3">
+            <img src="img/p4..png" alt="Imagem 4">
+            <img src="img/p5.png" alt="Imagem 5">
+            <img src="img/p6..png" alt="Imagem 6">
+        </div>
+    </div>
+
+    <div class="carousel-controls">
+        <button id="prev">&lt;</button>
+        <button id="next">&gt;</button>
+    </di>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const carouselInner = document.querySelector('.carousel-inner');
+            const prevButton = document.getElementById('prev');
+            const nextButton = document.getElementById('next');
+            const images = document.querySelectorAll('.carousel-inner img');
+            const totalImages = images.length;
+            let index = 0;
+
+            const showImage = (index) => {
+                const offset = -index * 499;
+                carouselInner.style.transform = `translateX(${offset}px)`;
+            };
+
+            prevButton.addEventListener('click', () => {
+                index = (index > 0) ? index - 1 : totalImages - 1;
+                showImage(index);
+            });
+
+            nextButton.addEventListener('click', () => {
+                index = (index < totalImages - 1) ? index + 1 : 0;
+                showImage(index);
+            });
+        });
+    </script>
+</body>
+</html>
